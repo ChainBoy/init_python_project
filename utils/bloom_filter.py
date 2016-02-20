@@ -26,6 +26,7 @@ class BloomFilter(pybloom.BloomFilter):
         self.insert = self.add
         self.set = self.add
 
+
 def test_1():
     bloom_filter = BloomFilter()
 

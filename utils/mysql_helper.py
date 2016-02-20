@@ -11,6 +11,7 @@ connor.connect()
 
 
 class MysqlHelper(object):
+
     """host="localhost", db="", user="root", passwd="", port=3306, pool_sizer=30, pool_name="mysql", commit_size=1"""
     commit_count = 0
 
@@ -30,7 +31,8 @@ class MysqlHelper(object):
             cursor.execute(sql, params)
         except Exception, e:
             try:
-                logging.error("Mysql Call error. SQL = %s, params = %s, Error.msg=%s" % (sql, str(params).encode("utf8"), e))
+                logging.error("Mysql Call error. SQL = %s, params = %s, Error.msg=%s" % (
+                    sql, str(params).encode("utf8"), e))
             except:
                 print sql, params, e
         self._last_row_id = cursor.lastrowid
