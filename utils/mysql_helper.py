@@ -26,6 +26,7 @@ class MysqlHelper(object):
         self._conn = connor.connect(*args, **kwargs)
 
     def insert(self, sql, params=None):
+        self._check_conn()
         cursor = self._create_cursor()
         try:
             cursor.execute(sql, params)
@@ -46,6 +47,7 @@ class MysqlHelper(object):
         return self.insert(sql, params)
 
     def select(self, sql, params=None):
+        self._check_conn()
         cursor = self._create_cursor()
         cursor.execute(sql, params)
         return cursor.fetchall()
@@ -59,6 +61,12 @@ class MysqlHelper(object):
     @property
     def last_row_id(self):
         return self._last_row_id
+
+    def _check_conn(self):
+        if not self._conn:
+            self.open(**self._config)
+        if not self._conn.open:
+            self.open(**self._config)
 
     def _create_cursor(self):
         # cursor = conn.cursor(cursor_class=conner.cursor.MySQLCursorDict)

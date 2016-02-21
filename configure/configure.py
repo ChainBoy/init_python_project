@@ -46,5 +46,8 @@ class Configure(object):
         return value
 
 
+    def _set_value(self, section, key, value=""):
+        self.__environment.set_configure_value(section, key, value)
+
 if __name__ == "__main__":
     pass
